@@ -1,0 +1,59 @@
+Base de données:
+
+Table Links
+ID -> Int auto increment primary key 
+base_url -> Varchar(255) not null
+shortened_url -> Varchar(255)  not null (is unique) --> uuid
+is_anonymous-> Int (si is_anonymous === 0, alors liaison avec utilisateur sinon on considère que l'utilisateur anonyme) not null
+user_id -> Int (LINK TO User Id) nullable
+expired_at -> Date(NULL)
+created_at -> Date not null
+updated_at -> Date not null
+
+Table Users
+ID -> Int auto increment primary key
+firstname -> Varchar(255)
+lastname -> Varchar(255)
+email -> Varchar(255)
+password -> Varchar(255)
+role -> ADMIN | USER
+created_at -> Date not null
+updated_at -> Date not null
+
+
+#REGLES DE GESTION
+___________________________
+si le lien est généré par un utilisateur anonyme,
+alors
+    le lien expire le lendemain
+
+
+si l'utilisateur a un role admin,
+alors
+    l'utilisateur peut voir l'ensemble des liens
+sinon
+    l'utilisateur voit ses propres liens
+
+
+#BONUS
+----------------------------
+Table Links_stat
+ID -> link_id
+access_number -> Int(le nombre de requête sur l'url)
+
+
++++++++++++++++++++++++++++++++
+
+fonctionnalités:
+
+Génération du qr code: https://www.npmjs.com/package/qrcode-generator
+
+
+Authentication JWT
+
+
+++++++++++++++++++++++++++++++++
+
+Technologies front-end: React, Redux
+Technologies back-end: Node.js, Express, JWT
+
