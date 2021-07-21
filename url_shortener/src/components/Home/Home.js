@@ -1,5 +1,5 @@
-import React from "react";
-import { Button , Spacer, Text, Input} from "@chakra-ui/react"
+import React from 'react';
+import { Button , Spacer, Input} from "@chakra-ui/react"
 import { Heading, InputGroup, Box, InputRightElement } from "@chakra-ui/react"
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 const Home = (props) => {
@@ -40,5 +40,10 @@ const Home = (props) => {
 
   );
 };
+
+
+Home.propTypes = {};
+
+Home.defaultProps = {};
 
 export default Home;

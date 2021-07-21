@@ -1,16 +1,25 @@
+import React from 'react';
 import './App.css';
 import Header from "./header";
-import Home from "./home";
+import  Home  from './components/Home/Home';
+import SignUp from './components/SignUp/SignUp';
 
 import { ChakraProvider, Text, Box, Heading, Button } from "@chakra-ui/react";
-import { List, ListItem, ListIcon, Spacer } from "@chakra-ui/react"
+import { List, ListItem, ListIcon } from "@chakra-ui/react"
 import MdCheckCircle from '@material-ui/icons/CheckCircle';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
     <ChakraProvider>
       <Header />
-      <Home />
+      <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/signup" component={SignUp} />
+        {/* <Route exact path="/login" component={SignIn} /> */}
+      </Switch>
+    </BrowserRouter>
 
       <Box margin="auto" marginTop="30px" p={10}  maxWidth="60%" borderWidth={5}   borderColor="blue"
         width="full"
@@ -36,6 +45,8 @@ function App() {
       </Box>
         </Box>
         </ChakraProvider>
+
+        
 
   );
 }

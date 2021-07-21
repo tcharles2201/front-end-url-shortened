@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Box,
   Heading,
@@ -39,9 +40,9 @@ const Header = (props) => {
       >
           <Tabs variant="soft-rounded" colorScheme="green">
             <TabList>
-                <Tab> Sign In</Tab>
-                <Tab> Sign Up</Tab>  
-                <Tab> A PROPOS</Tab>     
+                <Tab> <a href="/login">Sign In</a> </Tab>
+                <Tab> <a href="/signup">Sign Up</a> </Tab>  
+                <Tab>  <a href="/apropos">A PROPOS</a> </Tab>     
             </TabList>
         </Tabs>
       </Box>
