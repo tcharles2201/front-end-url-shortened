@@ -1,0 +1,43 @@
+Front-end Architecture
+
+/src/App.js
+                    ==> Entrypoint
+/src/index.js 
+
+/src/components/        ===> Main Views/Components
+
+    /src/components/users ====> Views/Components related to Users
+
+    /src/components/links ====> Views/Components related to Links
+
+    /src/components/auth ====> Views/Components related to Authentication
+
+    /src/components/options ====> Views/Components related to views that are not related to users, links, and Authentication
+
+        /src/components/components/home
+
+
+/src/lib            ===> Custom library
+
+
+    /src/lib/components         ===> Custom UI Component
+
+
+    /src/lib/services/          ====> Models, Operations used by the components
+
+        /src/lib/services/users         ===> Users Model
+
+        /src/lib/services/links         ===> Links Model
+
+        /src/lib/services/auth          ====> Authentication Model
+
+        /src/lib/services/options       ===>  Models not(Users, Links, Auth)
+
+/src/tests          ===> Testing script
+
+    /src/tests/users    ===> Users testing script 
+
+    /src/tests/links    ===> Links testing script 
+
+    /src/tests/auth     ===> Auth testing script
+

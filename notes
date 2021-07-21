@@ -35,7 +35,7 @@ sinon
     l'utilisateur voit ses propres liens
 
 
-#BONUS
+#BONUS(si possible)
 ----------------------------
 Table Links_stat
 ID -> link_id
@@ -56,4 +56,6 @@ Authentication JWT
 
 Technologies front-end: React, Redux
 Technologies back-end: Node.js, Express, JWT
+
++++++++++++++++++++++++++++++++++
 
