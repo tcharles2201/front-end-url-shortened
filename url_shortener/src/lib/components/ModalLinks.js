@@ -109,7 +109,6 @@ export function ModalLinks(props){
                         if (!expire){
                             data.expired_at = null;
                         }
-                        console.log(data);
                         UpdateLink(event, data);
                     }}>
                         Mettre à jour
