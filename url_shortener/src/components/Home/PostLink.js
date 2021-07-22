@@ -11,7 +11,7 @@ import {
   TableCaption,
 } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
-
+import { HomeService } from "../../lib/services/HomeService";
 import { Heading, InputGroup, Box, Flex } from "@chakra-ui/react";
 import { useClipboard } from "@chakra-ui/react";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
@@ -19,6 +19,7 @@ import { DownloadIcon, CopyIcon } from "@chakra-ui/icons";
 
 var Url = require("url-parse");
 const baseURL = "http://localhost:8125/api/links";
+const homeService = new HomeService();
 
 var QRCode = require("qrcode.react");
 
@@ -29,30 +30,55 @@ export default function PostLink() {
 
   const { onCopy, hasCopied } = useClipboard(shortedLink);
 
-  function createLink() {
+  function createLinkShorted() {
     document.getElementById("url-entered").value = "";
-
-    const linkObject = {
+    const toSaved = {
       short_description: "",
       is_anonymous: 1,
       base_url: baseLink,
     };
     if (baseLink !== "") {
-      axios.post(baseURL, linkObject).then((response) => {
-        setLink(response.data.shortened_url);
-      });
+      homeService.createLink(toSaved).then((response) => {
+        const data = response.data;
+        setLink(data.shortened_url);
+    }).catch((error) => {
+        console.log("error")
+    })
     } else {
       alert("please enter a link");
     }
-    getBaseUrl();
+    FetchBaseUrl();
+
   }
 
-  function getBaseUrl() {
-    var url = new Url(shortedLink);
-    axios.get(`http://localhost:8125${url.pathname}`).then((response) => {
-      setOriginalLink(response.data.url);
-    });
+  function FetchBaseUrl(){
+    console.log("shortedLink before :"+shortedLink)
+    if(shortedLink===""){
+      console.log("shortedLink empty :"+shortedLink)
+
+    }
+    if(shortedLink){
+      console.log("shortedLink :"+shortedLink)
+      homeService.getBaseUrl(shortedLink).then((response) => {
+        if(response){
+          setOriginalLink(response.data.url);
+        }
+        else {
+          console.log("eeeeeee")
+        }
+  }).catch((error) => {
+      console.log(error);
+      //setOriginalLink(null);
+  });
+    }
+   
   }
+  // function getBaseUrl(shortedLink) {
+  //   var url = new Url(shortedLink);
+  //   axios.get(`http://localhost:8125${url.pathname}`).then((response) => {
+  //     setOriginalLink(response.data.url);
+  //   });
+  // }
 
   // download QR code
   const download = function () {
@@ -109,7 +135,7 @@ export default function PostLink() {
             _hover={{ bg: "teal.600" }}
             _focus={{ boxShadow: "outline" }}
             rightIcon={<ArrowForwardIcon />}
-            onClick={createLink}
+            onClick={createLinkShorted}
             type="submit"
           >
             Shorten URL
@@ -140,9 +166,9 @@ export default function PostLink() {
             </Td>
 
             <Td maxWidth="80px">
-              <Link color="blue" href={urlObtained} isExternal>
-                {shortedLink}
-              </Link>
+                <Link color="blue" href={urlObtained} isExternal>
+                  {shortedLink}
+                </Link>
             </Td>
             <Td maxWidth="70px">
               {shortedLink === "" ? null : (
