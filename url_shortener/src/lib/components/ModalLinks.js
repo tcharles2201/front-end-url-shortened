@@ -84,6 +84,8 @@ export function ModalLinks(props){
                 <ModalFooter>
                 <ButtonGroup size="lg" isAttached>
                     <Button onClick={(event) => {
+                        const data = JSON.parse(JSON.stringify(link));
+
                         for (let key in refObject){
                             const i = key.indexOf("Ref");
                             const u_key = key.substr(0, i).replace(/[A-Z]+/g, (str) => {
@@ -95,20 +97,20 @@ export function ModalLinks(props){
 
                                 return (`_${c}`);
                             });
+
                             if (refObject[key] && refObject[key].current){
                                 const value = refObject[key].current.value;
 
                                 if (value){
-                                    link[u_key] = value;
+                                    data[u_key] = value;
                                 }
                             }
- 
                         }
                         if (!expire){
-                            link.expired_at = null;
+                            data.expired_at = null;
                         }
-                        console.log(link);
-                        UpdateLink(event, link);
+                        console.log(data);
+                        UpdateLink(event, data);
                     }}>
                         Mettre à jour
                     </Button>

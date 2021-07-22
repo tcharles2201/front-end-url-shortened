@@ -107,6 +107,7 @@ export function DashboardLinks(props) {
             setShouldRenderNumber(true);
         }).catch((error) => {
             console.log(error);
+            selectLink(null);
             setShouldRenderList(false);
             setShouldRenderNumber(true);
         });
@@ -154,8 +155,8 @@ export function DashboardLinks(props) {
 
         }).catch((error) => {
             console.log(error);
-            onClose(event);
-            setShouldRenderList(true);
+           // onClose(event);
+            //setShouldRenderList(true);
 
         });
     }
