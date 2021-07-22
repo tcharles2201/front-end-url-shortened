@@ -1,49 +1,52 @@
-import React from 'react';
-import { Button , Spacer, Input} from "@chakra-ui/react"
-import { Heading, InputGroup, Box, InputRightElement } from "@chakra-ui/react"
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-const Home = (props) => {
+import React, { Component } from "react";
 
-  return (
-     
-        <Box margin="auto" marginTop="30px" p={10}  maxWidth="80%" borderWidth={5}  
-        width="full"
-        >   
-        <Box textAlign="center" paddingBottom="15px">
-          <Heading as="h1" textColor="black" fontSize="40px" >Paste the URL to be shortened</Heading>
-        </Box>
-        <Spacer />
+import {
+  List,
+  ListItem,
+  ListIcon,
+  Text,
+  Box,
+  Heading,
+  Button,
+} from "@chakra-ui/react";
+import MdCheckCircle from "@material-ui/icons/CheckCircle";
 
-        <InputGroup size="lg" paddingBottom="10px">
-      <Input
-        placeholder="Enter the Link Here"
-      />
-      <InputRightElement width="9.5rem" paddingRight="10px" paddingLeft="10px">
-            <Button rightIcon={<ArrowForwardIcon />}  type="submit" colorScheme="teal" variant="outline">
-            Shorten URL
-             </Button>
-      </InputRightElement>
-    </InputGroup>
-        {/* <Flex >  
-            <Box p="4">
-              <FormLabel >Paste the URL to be shortened :</FormLabel>
-              <Input type="urlToShort" width="auto" placeholder="Enter the Link Here" />
-            </Box>
-            <Spacer />
-            <Box p="8" >
-            <Button  mt={4} type="submit" color="white" backgroundColor="blue">
-              Shorten URL
+import PostLink from "./PostLink";
+
+export default class Home extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <PostLink />
+        <Box
+          margin="auto"
+          marginTop="30px"
+          p={10}
+          maxWidth="60%"
+          borderWidth={5}
+          borderColor="blue"
+          width="full"
+        >
+          <Box maxW="32rem" align="center" margin="auto" paddingTop="10px">
+            <Heading mb={4}>Create a free account to enjoy: </Heading>
+            <Text fontSize="xl">
+              <List spacing={3} align="center">
+                <ListItem>
+                  <ListIcon as={MdCheckCircle} color="green.500" />
+                  Easy Link Shortening
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={MdCheckCircle} color="green.500" />
+                  Full Link History
+                </ListItem>
+              </List>
+            </Text>
+            <Button size="lg" colorScheme="green" mt="24px">
+              Create a free account
             </Button>
-            </Box>
-        </Flex> */}
-      </Box>
-
-  );
-};
-
-
-Home.propTypes = {};
-
-Home.defaultProps = {};
-
-export default Home;
+          </Box>
+        </Box>
+      </React.Fragment>
+    );
+  }
+}
