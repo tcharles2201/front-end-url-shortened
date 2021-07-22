@@ -1,3 +1,11 @@
+all: 
+	make build:production 
+	make run:production
+
+dev: 
+	make build:development
+	make run:development
+
 build\:init:
 	docker build -f Dockerfile.init -t my/react .	
 
