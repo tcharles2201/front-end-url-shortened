@@ -29,7 +29,7 @@ Voici les principales technologies et framework utilisé dans le projet :
 - Docker
 
 
-## Partie Frontend du projet
+## Partie Back-end du projet
 
-Voici le lien vers la partie Frontend de notre projet :
+Voici le lien vers la partie Back-end de notre projet :
 - [Backend URL Shortened](https://github.com/tcharles2201/back-end-url-shortened)
