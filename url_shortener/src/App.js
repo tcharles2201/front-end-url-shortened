@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import Register from './component/register.js';
+import Login from './component/login.js';
 import { ChakraProvider } from "@chakra-ui/react"
 import { DashboardLinks } from "./components/links/DashboardLinks";
 import React, { useState } from "react";
