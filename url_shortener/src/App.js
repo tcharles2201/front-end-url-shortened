@@ -1,15 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import Register from './components/register.js';
-import Login from './components/login.js';
-import { ChakraProvider } from "@chakra-ui/react"
 import { DashboardLinks } from "./components/links/DashboardLinks";
+import "./App.css";
 import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
 import Header from "./header";
 import Home from "./components/Home/Home";
 import SignUp from "./components/SignUp/SignUp";
+import SignIn from "./components/Login/SignIn";
+
+import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
@@ -29,8 +30,6 @@ function App() {
     } else {
       window.location.replace(urlObtained);
     }
-
-    // window.location.replace(urlObtained) ;
   }
 
   console.log(process.env);
@@ -41,6 +40,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/login" component={SignIn} />
         </Switch>
       </BrowserRouter>
     </ChakraProvider>

@@ -56,5 +56,4 @@ export class LinkService {
 
         return (response);
     }
-
 }

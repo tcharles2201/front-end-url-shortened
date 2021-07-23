@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState, Fragment } from "react";
 import { Button, Spacer, Input } from "@chakra-ui/react";
 import {
@@ -38,40 +37,42 @@ export default function PostLink() {
       base_url: baseLink,
     };
     if (baseLink !== "") {
-      homeService.createLink(toSaved).then((response) => {
-        const data = response.data;
-        setLink(data.shortened_url);
-    }).catch((error) => {
-        console.log("error")
-    })
+      homeService
+        .createLink(toSaved)
+        .then((response) => {
+          const data = response.data;
+          setLink(data.shortened_url);
+        })
+        .catch((error) => {
+          console.log("error");
+        });
     } else {
       alert("please enter a link");
     }
     FetchBaseUrl();
-
   }
 
-  function FetchBaseUrl(){
-    console.log("shortedLink before :"+shortedLink)
-    if(shortedLink===""){
-      console.log("shortedLink empty :"+shortedLink)
-
+  function FetchBaseUrl() {
+    console.log("shortedLink before :" + shortedLink);
+    if (shortedLink === "") {
+      console.log("shortedLink empty :" + shortedLink);
     }
-    if(shortedLink){
-      console.log("shortedLink :"+shortedLink)
-      homeService.getBaseUrl(shortedLink).then((response) => {
-        if(response){
-          setOriginalLink(response.data.url);
-        }
-        else {
-          console.log("eeeeeee")
-        }
-  }).catch((error) => {
-      console.log(error);
-      //setOriginalLink(null);
-  });
+    if (shortedLink) {
+      console.log("shortedLink :" + shortedLink);
+      homeService
+        .getBaseUrl(shortedLink)
+        .then((response) => {
+          if (response) {
+            setOriginalLink(response.data.url);
+          } else {
+            console.log("eeeeeee");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          //setOriginalLink(null);
+        });
     }
-   
   }
   // function getBaseUrl(shortedLink) {
   //   var url = new Url(shortedLink);
@@ -166,9 +167,9 @@ export default function PostLink() {
             </Td>
 
             <Td maxWidth="80px">
-                <Link color="blue" href={urlObtained} isExternal>
-                  {shortedLink}
-                </Link>
+              <Link color="blue" href={urlObtained} isExternal>
+                {shortedLink}
+              </Link>
             </Td>
             <Td maxWidth="70px">
               {shortedLink === "" ? null : (
