@@ -4,7 +4,6 @@ import {
   List,
   ListItem,
   ListIcon,
-  Text,
   Box,
   Heading,
   Button,
@@ -16,19 +15,17 @@ import { verify } from "jsonwebtoken";
 import { withRouter } from "react-router";
 
 class Home extends Component {
-
-  componentDidMount(){
+  componentDidMount() {
     const token = window.localStorage.getItem("token");
 
     console.log(token);
-    if (!token){
+    if (!token) {
       return;
     }
     const data = verify(token, process.env.REACT_APP_SECRET);
 
-    console.log(data);
-    if (data && data.id){
-        this.props.history.replace("/links");
+    if (data && data.id) {
+      this.props.history.replace("/links");
     }
   }
 
@@ -47,17 +44,22 @@ class Home extends Component {
         >
           <Box maxW="32rem" align="center" margin="auto" paddingTop="10px">
             <Heading mb={4}>Create a free account to enjoy: </Heading>
-              <List  fontSize="xl"spacing={3} align="center">
-                <ListItem>
-                  <ListIcon as={MdCheckCircle} color="green.500" />
-                  Easy Link Shortening
-                </ListItem>
-                <ListItem>
-                  <ListIcon as={MdCheckCircle} color="green.500" />
-                  Full Link History
-                </ListItem>
-              </List>
-            <Button size="lg" colorScheme="green" mt="24px">
+            <List fontSize="xl" spacing={3} align="center">
+              <ListItem>
+                <ListIcon as={MdCheckCircle} color="green.500" />
+                Easy Link Shortening
+              </ListItem>
+              <ListItem>
+                <ListIcon as={MdCheckCircle} color="green.500" />
+                Full Link History
+              </ListItem>
+            </List>
+            <Button
+              size="lg"
+              onClick={() => this.props.history.push("/signup")}
+              colorScheme="green"
+              mt="24px"
+            >
               Create a free account
             </Button>
           </Box>

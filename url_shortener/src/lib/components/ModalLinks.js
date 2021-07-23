@@ -48,7 +48,6 @@ export function ModalLinks(props) {
   const baseUrlRef = useRef();
   const shortDescriptionRef = useRef();
   const expiredAtRef = useRef();
-  const expireRef = useRef();
   const refObject = { codeRef, baseUrlRef, shortDescriptionRef, expiredAtRef };
 
   if (link && link.shortened_url) {
