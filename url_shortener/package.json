@@ -14,10 +14,7 @@
     "axios": "^0.21.1",
     "framer-motion": "^4.1.17",
     "generate-react-cli": "^7.0.3",
-<<<<<<< HEAD
     "jsonwebtoken": "^8.5.1",
-=======
->>>>>>> c1e0fdcb63031dae8c2f07da233800a9b4548dd3
     "moment": "^2.29.1",
     "qrcode-generator": "^1.4.4",
     "qrcode.react": "^1.0.1",
