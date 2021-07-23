@@ -47,6 +47,7 @@ function Header(props){
               {window.localStorage.getItem("token") && <Tab><Link href="/links">Dashboard</Link></Tab>}
               {!window.localStorage.getItem("token") && <Tab> <Link href="/login">Sign In</Link></Tab>}
               {!window.localStorage.getItem("token") && <Tab><Link href="/signup">Sign Up</Link></Tab>}
+              {window.localStorage.getItem("token") && <Tab><Link href="/logout">Sign Up</Link></Tab>}
               <Tab>
                 <Link href="/apropos">A PROPOS</Link>
               </Tab>
