@@ -64,7 +64,7 @@ export function DashboardLinks(props) {
   try {
     console.log(token);
     console.log(process.env);
-    data = verify(token, process.env.REACT_APP_SECRET);
+    verify(token, process.env.REACT_APP_SECRET);
     console.log(data);
   }
   catch (e){
@@ -82,7 +82,7 @@ export function DashboardLinks(props) {
 
   function FetchAllLinks() {
     linkService
-      .listByUser(data.id)
+      .listByUser()
       .then((response) => {
         console.log(response.data);
         setLinks(response.data);
