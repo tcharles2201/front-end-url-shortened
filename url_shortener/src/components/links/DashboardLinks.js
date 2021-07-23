@@ -79,17 +79,19 @@ export function DashboardLinks(props) {
         props.history.replace("/");
     }
     try {
+        console.log(token);
+        console.log(process.env);
         data = verify(token, process.env.REACT_APP_SECRET);
-
+        console.log(data);
     }
     catch (e){
+        console.log(e.message);
         props.history.replace("/");
         window.localStorage.removeItem("token");
     }
 
     if (!data){
-        window.localStorage.removeItem("token");
-        return (<></>);
+        return (<div></div>);
     }
 
     function selectLink(event, link){
