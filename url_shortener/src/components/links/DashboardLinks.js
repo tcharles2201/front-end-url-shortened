@@ -64,7 +64,7 @@ export function DashboardLinks(props) {
   try {
     console.log(token);
     console.log(process.env);
-    const data = verify(token, process.env.REACT_APP_SECRET);
+    data = verify(token, process.env.REACT_APP_SECRET);
     console.log(data);
   }
   catch (e){
@@ -72,6 +72,7 @@ export function DashboardLinks(props) {
     props.history.replace("/");
     window.localStorage.removeItem("token");
   }
+  console.log(data);
   if (!data){
     return (<div></div>);
   }

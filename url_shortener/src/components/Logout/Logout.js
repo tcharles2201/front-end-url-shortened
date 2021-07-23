@@ -2,9 +2,8 @@ import { withRouter } from "react-router";
 
 function Logout(props){
     window.localStorage.removeItem("token");
-    const { renderApp, setRenderApp } = props;
 
-    setRenderApp(!renderApp);
+    props.history.replace("/");
 }
 
 export default withRouter(Logout);
