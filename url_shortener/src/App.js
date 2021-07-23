@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import Register from './component/register.js';
-import Login from './component/login.js';
+import Register from './components/register.js';
+import Login from './components/login.js';
 import { ChakraProvider } from "@chakra-ui/react"
 import { DashboardLinks } from "./components/links/DashboardLinks";
 import React, { useState } from "react";
@@ -10,20 +10,19 @@ import axios from "axios";
 import Header from "./header";
 import Home from "./components/Home/Home";
 import SignUp from "./components/SignUp/SignUp";
-import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   const [urlObtained, setOriginalLink] = useState("");
   function getBaseUrlFromApp() {
     axios
-      .get(`http://localhost:8125${window.location.pathname}`)
+      .get(`${process.env.REACT_APP_API}${window.location.pathname}`)
       .then((response) => {
         setOriginalLink(response.data.url);
       });
   }
 
-  if (window.location.href.match("http://localhost:3000/redirect/")) {
+  if (window.location.href.match(`${process.env.REACT_APP_HOST}/redirect/`)) {
     getBaseUrlFromApp();
     if (urlObtained === "") {
       console.error("vide " + urlObtained);
@@ -34,6 +33,7 @@ function App() {
     // window.location.replace(urlObtained) ;
   }
 
+  console.log(process.env);
   return (
     <ChakraProvider>
       <Header />

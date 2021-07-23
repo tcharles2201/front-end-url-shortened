@@ -5,7 +5,7 @@ export class LinkService {
 
     }
 
-    static BASE_URI = "http://localhost:8125";
+    static BASE_URI = `${process.env.REACT_APP_API}`;
 
     async save(link){
         const response = await axios.post(`${LinkService.BASE_URI}/api/links`, link, {

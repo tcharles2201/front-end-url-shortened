@@ -29,8 +29,7 @@ export default class Home extends Component {
         >
           <Box maxW="32rem" align="center" margin="auto" paddingTop="10px">
             <Heading mb={4}>Create a free account to enjoy: </Heading>
-            <Text fontSize="xl">
-              <List spacing={3} align="center">
+              <List  fontSize="xl"spacing={3} align="center">
                 <ListItem>
                   <ListIcon as={MdCheckCircle} color="green.500" />
                   Easy Link Shortening
@@ -40,7 +39,6 @@ export default class Home extends Component {
                   Full Link History
                 </ListItem>
               </List>
-            </Text>
             <Button size="lg" colorScheme="green" mt="24px">
               Create a free account
             </Button>

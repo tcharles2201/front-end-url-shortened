@@ -18,7 +18,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { DownloadIcon, CopyIcon } from "@chakra-ui/icons";
 
 var Url = require("url-parse");
-const baseURL = "http://localhost:8125/api/links";
+const baseURL = `${process.env.REACT_APP_API}/api/links`;
 const homeService = new HomeService();
 
 var QRCode = require("qrcode.react");

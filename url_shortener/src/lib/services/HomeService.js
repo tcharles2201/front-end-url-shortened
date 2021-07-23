@@ -5,7 +5,7 @@ export class HomeService {
     constructor(){
 
     }
-    static BASE_URI = "http://localhost:8125";
+    static BASE_URI = `${process.env.REACT_APP_API}`;
 
     async createLink(linkObject){
         const response = await axios.post(`${HomeService.BASE_URI}/api/links`, linkObject);

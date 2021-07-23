@@ -46,7 +46,7 @@ export default class Register extends React.Component {
 
   register = () => {
      console.log("je suis bien dans register!");
-      Axios.post("http://localhost:8125/api/users", {
+      Axios.post(`${process.env.REACT_APP_API}/api/users`, {
         firstname: this.state.firstnameReg,
         lastname: this.state.lastnameReg,
         role: this.state.role,
