@@ -23,7 +23,6 @@ var QRCode = require("qrcode.react");
 export default function PostLink() {
   const [shortedLink, setLink] = useState("");
   const [baseLink, setBaseLink] = useState("");
-  const [urlObtained, setOriginalLink] = useState("");
 
   const { onCopy, hasCopied } = useClipboard(shortedLink);
 
@@ -51,19 +50,12 @@ export default function PostLink() {
   }
 
   function FetchBaseUrl() {
-    console.log("shortedLink before :" + shortedLink);
-    if (shortedLink === "") {
-      console.log("shortedLink empty :" + shortedLink);
-    }
     if (shortedLink) {
-      console.log("shortedLink :" + shortedLink);
       homeService
         .getBaseUrl(shortedLink)
         .then((response) => {
           if (response) {
-            setOriginalLink(response.data.url);
           } else {
-            console.log("eeeeeee");
           }
         })
         .catch((error) => {
@@ -165,7 +157,7 @@ export default function PostLink() {
             </Td>
 
             <Td maxWidth="80px">
-              <Link color="blue" href={urlObtained} isExternal>
+              <Link color="blue" href={shortedLink} isExternal>
                 {shortedLink}
               </Link>
             </Td>
