@@ -120,7 +120,7 @@ export default class SignUp extends React.Component {
           />
           <br />
           <Center h="100px">
-            <Button colorScheme="teal" variant="solid">Register</Button>
+            <Button colorScheme="teal" onClick={() => this.register()} variant="solid">Register</Button>
           </Center>
         </FormControl>
         </Stack>

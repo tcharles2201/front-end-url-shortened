@@ -64,7 +64,7 @@ function App() {
             render={() => <SignIn renderApp={shouldRenderApp} setRenderApp={setShouldRenderApp} />}
           />
           <Route exact path="/links" component={DashboardLinks} />
-          <Route exact path="/logout" render={() => <Logout renderApp={shouldRenderApp} setRenderApp={setShouldRenderApp} />} />
+          <Route exact path="/logout" component={Logout} />
         </Switch>
       </BrowserRouter>
     </ChakraProvider>
