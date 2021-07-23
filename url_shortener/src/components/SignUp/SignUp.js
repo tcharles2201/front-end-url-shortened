@@ -2,7 +2,7 @@ import React from "react";
 import Axios from "axios";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
-import { Input, FormControl, FormLabel, Select } from "@chakra-ui/react";
+import { Input, FormControl, FormLabel, Select, Stack, Center, Box } from "@chakra-ui/react";
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -57,12 +57,15 @@ export default class SignUp extends React.Component {
 
   render() {
     return (
-      <ChakraProvider>
+        <ChakraProvider> 
+        <Box w="50%" mx="auto">
+        <Stack maxWidth={1200} margin="auto" spacing={5} marginTop={5}>
         <FormControl>
-          <FormLabel>FirstName</FormLabel>
+          <FormLabel htmlFor="firstname">FirstName</FormLabel>
           <Input
             type="text"
-            id="1"
+            id="firstname"
+            autocomplete="off"
             bgColor="white"
             border="2px"
             borderStyle="solid"
@@ -70,10 +73,11 @@ export default class SignUp extends React.Component {
             color="black"
             onChange={this.updateValueFirstName}
           />
-          <FormLabel>LastName</FormLabel>
+          <FormLabel htmlFor="lastname">LastName</FormLabel>
           <Input
             type="text"
-            id="2"
+            id="lastname"
+            autocomplete="off"
             bgColor="white"
             border="2px"
             borderStyle="solid"
@@ -81,15 +85,18 @@ export default class SignUp extends React.Component {
             color="black"
             onChange={this.updateValueLastName}
           />
-          <FormLabel>Role</FormLabel>
+          <FormLabel htmlFor="role">Role</FormLabel>
           <Select onChange={this.updateValueRole}>
             <option value="admin">Admin</option>
             <option value="user">User</option>
           </Select>
-          <FormLabel>Mail</FormLabel>
+          <FormLabel htmlFor="mail">Mail</FormLabel>
           <Input
-            type="text"
-            id="1"
+            isRequired
+            type="email"
+            id="email"
+            autocomplete="off"
+            aria-describedby="email-helper-text"
             bgColor="white"
             border="2px"
             borderStyle="solid"
@@ -97,10 +104,13 @@ export default class SignUp extends React.Component {
             color="black"
             onChange={this.updateValueMail}
           />
-          <FormLabel>Password</FormLabel>
+          <FormLabel htmlFor="password">Password</FormLabel>
           <Input
             type="password"
-            id="2"
+            id="password"
+            size="md"
+            autocomplete="off"
+            aria-describedby="password-helper-text"
             bgColor="white"
             border="2px"
             borderStyle="solid"
@@ -108,22 +118,14 @@ export default class SignUp extends React.Component {
             color="black"
             onChange={this.updateValuePassword}
           />
-          <Button
-            border="2px"
-            borderStyle="solid"
-            borderColor="white"
-            fontFamily="Playball"
-            color="white"
-            bgColor="warmGrey.500"
-            fontWeight="10"
-            fontSize="1.2rem"
-            _hover="warmGrey.200"
-            onClick={this.register}
-          >
-            Register
-          </Button>
+          <br />
+          <Center h="100px">
+            <Button colorScheme="teal" variant="solid">Register</Button>
+          </Center>
         </FormControl>
-      </ChakraProvider>
+        </Stack>
+        </Box>
+        </ChakraProvider>
     );
   }
 }
