@@ -13,23 +13,27 @@ Les membres du groupe sont :
 La description du projet est disponible ici >[Project](Project.md)
 
 # Prérequis
+
 Pour pouvoir compiler et lancer le serveur depuis les sources les logiciels suivants sont nécessaire :
 - Docker
 - docker-compose
 - Cygwin sur windows
 
 # Installation & Utilisation
-to be defined ....
+
+Dans le cadre d'une mise en production, l'application peut-être lancer, de la manière suivante: `make`.
+Dans le cadre de développement, l'application peut-être lancer de la manière suivante: `make dev`.
 
 # Technologies
 
 Voici les principales technologies et framework utilisé dans le projet :
 - React
+- Chakra UI
 - JavaScript
 - Docker
 
 
-## Partie Frontend du projet
+## Partie Back-end du projet
 
-Voici le lien vers la partie Frontend de notre projet :
-- [Backend URL Shortened](https://github.com/tcharles2201/back-end-url-shortened)
+Voici le lien vers la partie Back-end de notre projet :
+- [Back-end URL Shortened](https://github.com/tcharles2201/back-end-url-shortened)
