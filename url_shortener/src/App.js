@@ -11,6 +11,7 @@ import SignIn from "./components/Login/SignIn";
 
 import { ChakraProvider, Heading } from "@chakra-ui/react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Logout from "./components/Logout/Logout";
 
 function App() {
   const [urlObtained, setOriginalLink] = useState("");
@@ -43,12 +44,15 @@ function App() {
     }
   }
 
-  const [shouldRenderHeader, setShouldRenderHeader] = useState(false);
+
+
+
+  const [shouldRenderApp, setShouldRenderApp] = useState(false);
 
   console.log(process.env);
   return (
     <ChakraProvider>
-      {!isRedirect() && <Header renderHeader={shouldRenderHeader} />}
+      {!isRedirect() && <Header renderApp={shouldRenderApp} />}
       {isRedirect() && errorShortened && <Heading>{errorShortened}</Heading> }
       <BrowserRouter>
         <Switch>
@@ -57,9 +61,10 @@ function App() {
           <Route
             exact
             path="/login"
-            render={() => <SignIn setRenderHeader={setShouldRenderHeader} />}
+            render={() => <SignIn renderApp={shouldRenderApp} setRenderApp={setShouldRenderApp} />}
           />
           <Route exact path="/links" component={DashboardLinks} />
+          <Route exact path="/logout" render={() => <Logout renderApp={shouldRenderApp} setRenderApp={setShouldRenderApp} />} />
         </Switch>
       </BrowserRouter>
     </ChakraProvider>

@@ -13,7 +13,7 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 function Header(props){
-  const { renderHeader, ...other } = props;
+  const { renderApp, ...other } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
 

@@ -64,7 +64,7 @@ export function DashboardLinks(props) {
   try {
     console.log(token);
     console.log(process.env);
-    verify(token, process.env.REACT_APP_SECRET);
+    const data = verify(token, process.env.REACT_APP_SECRET);
     console.log(data);
   }
   catch (e){
