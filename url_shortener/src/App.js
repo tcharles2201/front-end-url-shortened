@@ -23,6 +23,10 @@ function App() {
       });
   }
 
+  function isRedirect(){
+    return (window.location.href.match(`${process.env.REACT_APP_HOST}/redirect/`));
+  }
+
   if (window.location.href.match(`${process.env.REACT_APP_HOST}/redirect/`)) {
     getBaseUrlFromApp();
     if (urlObtained === "") {
@@ -37,7 +41,7 @@ function App() {
   console.log(process.env);
   return (
     <ChakraProvider>
-      <Header renderHeader={shouldRenderHeader}  />
+      {isRedirect() && <Header renderHeader={shouldRenderHeader}  />}
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={() => <Home />} />
