@@ -19,7 +19,7 @@ export class LinkService {
 
   async listByUser(userId) {
     const response = await axios.get(
-      `${LinkService.BASE_URI}/api/links/${userId}/user`,
+      `${LinkService.BASE_URI}/api/links/user`,
       {
         headers: {
           "x-access-token": localStorage.getItem("token"),
