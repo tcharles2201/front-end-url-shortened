@@ -4,8 +4,6 @@ export function AnimateNumber(props) {
   const title = React.createRef();
   const { start, shouldRender, limit, template, setStart, setRender } = props;
   let i = start;
-  let d = Date.now();
-  let d2 = Date.now();
 
   if (shouldRender) {
     let timerID = setInterval(() => {

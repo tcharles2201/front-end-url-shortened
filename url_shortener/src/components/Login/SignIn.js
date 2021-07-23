@@ -3,8 +3,10 @@ import Axios from "axios";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { Input, FormControl, FormLabel, Center, Box } from "@chakra-ui/react";
+import { withRouter } from "react-router";
 
-export default class SignIn extends React.Component {
+
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,12 +27,15 @@ export default class SignIn extends React.Component {
   }
 
   login = () => {
-    Axios.post("http://localhost:8125/api/users/login", {
+    Axios.post(`${process.env.REACT_APP_API}/api/users/login`, {
       email: this.state.mailReg,
       password: this.state.passwordReg,
     }).then((response) => {
       console.log(response);
-      localStorage.setItem("token", response.data.token);
+      window.localStorage.setItem("token", response.data.token);
+      this.props.history.push("/links");
+      this.props.setRenderHeader(true);
+      console.log("ok");
     });
   };
 
@@ -76,3 +81,5 @@ export default class SignIn extends React.Component {
     );
   }
 }
+
+export default withRouter(SignIn);

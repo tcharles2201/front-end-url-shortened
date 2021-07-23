@@ -39,7 +39,7 @@ function renderExpiredAt(expire, link, expiredAtRef) {
   );
 }
 
-const BASE_HOST = "http://localhost:3000/redirect/";
+const BASE_HOST  = `${process.env.REACT_APP_HOST}/redirect/`;
 
 export function ModalLinks(props) {
   const { link, isOpen, UpdateLink, DeleteLink, onClose } = props;
@@ -48,7 +48,6 @@ export function ModalLinks(props) {
   const baseUrlRef = useRef();
   const shortDescriptionRef = useRef();
   const expiredAtRef = useRef();
-  const expireRef = useRef();
   const refObject = { codeRef, baseUrlRef, shortDescriptionRef, expiredAtRef };
 
   if (link && link.shortened_url) {
