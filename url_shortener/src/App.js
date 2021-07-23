@@ -9,16 +9,22 @@ import Home from "./components/Home/Home";
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/Login/SignIn";
 
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Heading } from "@chakra-ui/react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   const [urlObtained, setOriginalLink] = useState("");
+  const [errorShortened, setErrorShortened] = useState("");
+
   function getBaseUrlFromApp() {
     axios
       .get(`${process.env.REACT_APP_API}${window.location.pathname}`)
       .then((response) => {
         setOriginalLink(response.data.url);
+        setErrorShortened(undefined);
+      }).catch((error) => {
+          setOriginalLink("");
+          setErrorShortened("The link has expired");
       });
   }
 
@@ -43,6 +49,7 @@ function App() {
   return (
     <ChakraProvider>
       {!isRedirect() && <Header renderHeader={shouldRenderHeader} />}
+      {isRedirect() && errorShortened && <Heading>{errorShortened}</Heading> }
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={() => <Home />} />
