@@ -28,11 +28,12 @@ Dans le cadre de développement, l'application peut-être lancer de la manière 
 
 Voici les principales technologies et framework utilisé dans le projet :
 - React
+- Chakra UI
 - JavaScript
 - Docker
 
 
-## Partie Front-end du projet
+## Partie Back-end du projet
 
-Voici le lien vers la partie Front-end de notre projet :
+Voici le lien vers la partie Back-end de notre projet :
 - [Back-end URL Shortened](https://github.com/tcharles2201/back-end-url-shortened)
