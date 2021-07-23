@@ -1,3 +1,6 @@
+import logo from './logo.svg';
+import './App.css';
+import { DashboardLinks } from "./components/links/DashboardLinks";
 import "./App.css";
 import React, { useState } from "react";
 import "./App.css";
@@ -14,13 +17,17 @@ function App() {
   const [urlObtained, setOriginalLink] = useState("");
   function getBaseUrlFromApp() {
     axios
-      .get(`http://localhost:8125${window.location.pathname}`)
+      .get(`${process.env.REACT_APP_API}${window.location.pathname}`)
       .then((response) => {
         setOriginalLink(response.data.url);
       });
   }
 
-  if (window.location.href.match("http://localhost:3000/redirect/")) {
+  function isRedirect(){
+    return (window.location.href.match(`${process.env.REACT_APP_HOST}/redirect/`));
+  }
+
+  if (window.location.href.match(`${process.env.REACT_APP_HOST}/redirect/`)) {
     getBaseUrlFromApp();
     if (urlObtained === "") {
       console.error("vide " + urlObtained);
@@ -29,14 +36,18 @@ function App() {
     }
   }
 
+  const [shouldRenderHeader, setShouldRenderHeader] = useState(false);
+
+  console.log(process.env);
   return (
     <ChakraProvider>
-      <Header />
+      {!isRedirect() && <Header renderHeader={shouldRenderHeader}  />}
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render={() => <Home />} />
           <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/login" component={SignIn} />
+          <Route exact path="/login"  render={() => <SignIn setRenderHeader={setShouldRenderHeader} />} />
+          <Route exact path="/links" component={DashboardLinks} />
         </Switch>
       </BrowserRouter>
     </ChakraProvider>

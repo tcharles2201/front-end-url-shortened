@@ -16,6 +16,8 @@ import { useClipboard } from "@chakra-ui/react";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { DownloadIcon, CopyIcon } from "@chakra-ui/icons";
 
+var Url = require("url-parse");
+const baseURL = `${process.env.REACT_APP_API}/api/links`;
 const homeService = new HomeService();
 
 var QRCode = require("qrcode.react");

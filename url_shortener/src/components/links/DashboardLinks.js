@@ -38,18 +38,10 @@ import {
 import { LinkService } from "../../lib/services/links/LinkService";
 import { ModalLinks } from "../../lib/components/ModalLinks";
 import moment from "moment";
+import { verify } from "jsonwebtoken";
 import {
     Stack, Box, HStack, VStack, Textarea, Center
 } from "@chakra-ui/react";
-
-function getId(links){
-    let id = 0;
-
-    for (let link of links){
-        id = link.id;
-    }
-    return (id + 1);
-}
 
 
 function renderSavedLink(link){
@@ -69,20 +61,6 @@ function renderSavedLink(link){
         </Center>));
 }
 
-const USER_ID = 1;
-const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjI2OTU5MDYwLCJleHAiOjE2MjcwNDU0NjB9.JqHq55liP8atrNMWqBEdmsBvv1XAZAhXY1XgNvTU86Y";
-
-let current_user = {
-    "id": 1,
-    "firstname": "Thomas",
-    "lastname": "simoes",
-    "email": "ha@gmail.com",
-    "password": "$2b$10$A.ZZLEAps.mnddGoBXoW5.wNuFQt81gR6D8YhRHsQNplrZ8TW3Swe",
-    "role": "User",
-    "created_at": "2021-07-22T13:04:16.000Z",
-    "updated_at": "2021-07-22T13:04:16.000Z"
-};
-
 export function DashboardLinks(props) {
     const [ links, setLinks ] = useState([]);
     const [ link, setLink ] = useState({});
@@ -94,14 +72,32 @@ export function DashboardLinks(props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const linkService = new LinkService();
 
-    localStorage.setItem("token", TOKEN);
+    const token = window.localStorage.getItem("token");  
+    let data = null;
+
+    if (!token){
+        props.history.replace("/");
+    }
+    try {
+        data = verify(token, process.env.REACT_APP_SECRET);
+
+    }
+    catch (e){
+        props.history.replace("/");
+        window.localStorage.removeItem("token");
+    }
+
+    if (!data){
+        window.localStorage.removeItem("token");
+        return (<></>);
+    }
 
     function selectLink(event, link){
         setLink(link);
     }
 
     function FetchAllLinks(){
-        linkService.listByUser(USER_ID).then((response) => {
+        linkService.listByUser(data.id).then((response) => {
             console.log(response.data);
             setLinks(response.data);
             setShouldRenderList(false);
@@ -119,7 +115,7 @@ export function DashboardLinks(props) {
         const toSaved = {
             base_url: link,
             is_anonymous: 0,
-            user_id: current_user.id,
+            user_id: data.id,
             short_description: ""
         };
 

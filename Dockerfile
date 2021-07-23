@@ -3,7 +3,7 @@ WORKDIR /app
 ADD url_shortener/ /app
 
 FROM react as staging
-RUN npm run build
+RUN rm -rf node_modules && npm install && npm run build
 
 FROM nginx as production
 WORKDIR /usr/share/nginx/html
