@@ -2,7 +2,7 @@ import React from "react";
 import Axios from "axios";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
-import { Input, FormControl, FormLabel } from "@chakra-ui/react";
+import { Input, FormControl, FormLabel, Center, Box } from "@chakra-ui/react";
 
 export default class SignIn extends React.Component {
   constructor(props) {
@@ -37,11 +37,13 @@ export default class SignIn extends React.Component {
   render() {
     return (
       <ChakraProvider>
+         <Box w="50%" mx="auto">
         <FormControl>
           <FormLabel>Identifiant</FormLabel>
           <Input
             type="text"
             id="1"
+            isFullWidth="false"
             bgColor="white"
             border="2px"
             borderStyle="solid"
@@ -60,21 +62,16 @@ export default class SignIn extends React.Component {
             color="black"
             onChange={this.updateValuePassword}
           />
-          <Button
-            border="2px"
-            borderStyle="solid"
-            borderColor="white"
-            fontFamily="Playball"
-            color="white"
-            bgColor="warmGrey.500"
-            fontWeight="10"
+          <br />
+          <Center h="100px">
+            <Button 
+            colorScheme="teal" 
+            variant="solid" 
             fontSize="1.2rem"
-            _hover="warmGrey.200"
-            onClick={this.login}
-          >
-            Login
-          </Button>
+            onClick={this.login}>Login</Button>
+          </Center>
         </FormControl>
+        </Box>
       </ChakraProvider>
     );
   }
