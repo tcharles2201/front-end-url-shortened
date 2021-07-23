@@ -8,6 +8,7 @@ import {
   Th,
   Td,
   TableCaption,
+  useToast,
 } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
 import { HomeService } from "../../lib/services/HomeService";
@@ -16,8 +17,6 @@ import { useClipboard } from "@chakra-ui/react";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { DownloadIcon, CopyIcon } from "@chakra-ui/icons";
 
-var Url = require("url-parse");
-const baseURL = `${process.env.REACT_APP_API}/api/links`;
 const homeService = new HomeService();
 
 var QRCode = require("qrcode.react");
@@ -25,7 +24,7 @@ var QRCode = require("qrcode.react");
 export default function PostLink() {
   const [shortedLink, setLink] = useState("");
   const [baseLink, setBaseLink] = useState("");
-  const [urlObtained, setOriginalLink] = useState("");
+  const toast = useToast();
 
   const { onCopy, hasCopied } = useClipboard(shortedLink);
 
@@ -42,44 +41,65 @@ export default function PostLink() {
         .then((response) => {
           const data = response.data;
           setLink(data.shortened_url);
+
+          toast({
+            title: "Link successfuly shorted.",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
         })
         .catch((error) => {
           console.log("error");
+          toast({
+            title: "Error when shorten link, please try again!",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
         });
     } else {
-      alert("please enter a link");
+      toast({
+        title: "Please enter a link.",
+        description: "You've to enter a link to short.",
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+      });
     }
     FetchBaseUrl();
   }
 
   function FetchBaseUrl() {
-    console.log("shortedLink before :" + shortedLink);
-    if (shortedLink === "") {
-      console.log("shortedLink empty :" + shortedLink);
-    }
     if (shortedLink) {
-      console.log("shortedLink :" + shortedLink);
       homeService
         .getBaseUrl(shortedLink)
         .then((response) => {
           if (response) {
-            setOriginalLink(response.data.url);
+            toast({
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
           } else {
-            console.log("eeeeeee");
+            toast({
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
           }
         })
         .catch((error) => {
           console.log(error);
+          toast({
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
           //setOriginalLink(null);
         });
     }
   }
-  // function getBaseUrl(shortedLink) {
-  //   var url = new Url(shortedLink);
-  //   axios.get(`http://localhost:8125${url.pathname}`).then((response) => {
-  //     setOriginalLink(response.data.url);
-  //   });
-  // }
 
   // download QR code
   const download = function () {
@@ -167,7 +187,7 @@ export default function PostLink() {
             </Td>
 
             <Td maxWidth="80px">
-              <Link color="blue" href={urlObtained} isExternal>
+              <Link color="blue" href={shortedLink} isExternal>
                 {shortedLink}
               </Link>
             </Td>

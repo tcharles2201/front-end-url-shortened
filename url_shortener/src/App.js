@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 import { DashboardLinks } from "./components/links/DashboardLinks";
 import "./App.css";
 import React, { useState } from "react";
@@ -23,8 +22,10 @@ function App() {
       });
   }
 
-  function isRedirect(){
-    return (window.location.href.match(`${process.env.REACT_APP_HOST}/redirect/`));
+  function isRedirect() {
+    return window.location.href.match(
+      `${process.env.REACT_APP_HOST}/redirect/`
+    );
   }
 
   if (window.location.href.match(`${process.env.REACT_APP_HOST}/redirect/`)) {
@@ -41,12 +42,16 @@ function App() {
   console.log(process.env);
   return (
     <ChakraProvider>
-      {!isRedirect() && <Header renderHeader={shouldRenderHeader}  />}
+      {!isRedirect() && <Header renderHeader={shouldRenderHeader} />}
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/login"  render={() => <SignIn setRenderHeader={setShouldRenderHeader} />} />
+          <Route
+            exact
+            path="/login"
+            render={() => <SignIn setRenderHeader={setShouldRenderHeader} />}
+          />
           <Route exact path="/links" component={DashboardLinks} />
         </Switch>
       </BrowserRouter>
