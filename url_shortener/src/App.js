@@ -41,7 +41,7 @@ function App() {
   console.log(process.env);
   return (
     <ChakraProvider>
-      {isRedirect() && <Header renderHeader={shouldRenderHeader}  />}
+      {!isRedirect() && <Header renderHeader={shouldRenderHeader}  />}
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={() => <Home />} />
