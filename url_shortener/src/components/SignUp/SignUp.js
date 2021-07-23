@@ -51,6 +51,7 @@ export default class SignUp extends React.Component {
       email: this.state.mailReg,
       password: this.state.passwordReg,
     }).then((response) => {
+      this.props.history.replace("/login");
       console.log(response);
     });
   };
