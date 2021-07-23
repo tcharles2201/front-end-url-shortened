@@ -13,7 +13,8 @@ import {
     FormLabel,
     InputGroup,
     Input,
-    InputRightElement
+    InputRightElement,
+    InputLeftAddon
   } from "@chakra-ui/react";
   import {
     Stack, Box, HStack, VStack, Textarea, Center
@@ -32,16 +33,21 @@ function renderExpiredAt(expire, link, expiredAtRef){
         </FormControl>);
 }
 
+const BASE_HOST  = "http://localhost:3000/redirect/";
+
 export function ModalLinks(props){
     const { link, isOpen, UpdateLink, DeleteLink, onClose } = props;
     const [expire, setExpire] = useState(false);
-    const shortenedUrlRef = useRef();
+    const codeRef = useRef();
     const baseUrlRef = useRef();
     const shortDescriptionRef = useRef();
     const expiredAtRef = useRef();
     const expireRef = useRef();
-    const refObject = { shortenedUrlRef, baseUrlRef, shortDescriptionRef, expiredAtRef };
+    const refObject = { codeRef, baseUrlRef, shortDescriptionRef, expiredAtRef };
 
+    if (link && link.shortened_url){
+        link.code = link.shortened_url.substring(BASE_HOST.length, link.shortened_url.length);
+    }
     return (<Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
             <ModalContent>
@@ -52,7 +58,8 @@ export function ModalLinks(props){
                         <FormControl isRequired>
                         <FormLabel>Shortened URL</FormLabel>
                         <InputGroup>
-                            <Input ref={shortenedUrlRef} defaultValue={link.shortened_url}  />
+                            <InputLeftAddon children={BASE_HOST} />
+                            <Input ref={codeRef} defaultValue={link.code}  />
                         </InputGroup>
                         </FormControl>
                         <FormControl isRequired>
@@ -102,7 +109,12 @@ export function ModalLinks(props){
                                 const value = refObject[key].current.value;
 
                                 if (value){
-                                    data[u_key] = value;
+                                    if (u_key === "code"){
+                                        data["shortened_url"] = `${BASE_HOST}${value}`;
+                                    }
+                                    else {
+                                        data[u_key] = value;
+                                    }
                                 }
                             }
                         }

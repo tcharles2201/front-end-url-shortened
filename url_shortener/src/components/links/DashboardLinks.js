@@ -171,10 +171,9 @@ export function DashboardLinks(props) {
                     <Heading color="white">Tableau de Bord</Heading>
                 </Box>
                 <Box paddingY="50">
-                        <Center>
-                            
-                            <AnimateNumber start={startRenderNumber} setStart={setStartRenderNumber} setRender={setShouldRenderNumber} shouldRender={shouldRenderNumber} template={"%d liens générés"}  limit={links.length} />
-                        </Center>
+                    <Center>
+                        <AnimateNumber start={startRenderNumber} setStart={setStartRenderNumber} setRender={setShouldRenderNumber} shouldRender={shouldRenderNumber} template={"%d liens générés"}  limit={links.length} />
+                    </Center>
                 </Box>
                 <Box p="50">
                     <Box p={4}  borderWidth="1px">
@@ -210,8 +209,7 @@ export function DashboardLinks(props) {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {
-                                    links.map((link) => {
+                                {links.map((link) => {
                                         return (<Tr key={link.shortened_url}> 
                                             <Td>{link.shortened_url}</Td>
                                             <Td>{link.base_url}</Td>
@@ -228,8 +226,7 @@ export function DashboardLinks(props) {
 
                                             </Td>
                                         </Tr>)
-                                    })
-                                }
+                                    })}
                             </Tbody>
                         </Table>
                         <ModalLinks link={link} isOpen={isOpen} UpdateLink={UpdateLink} DeleteLink={DeleteLink} onClose={onClose} />
