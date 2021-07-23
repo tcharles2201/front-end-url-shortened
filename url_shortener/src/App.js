@@ -32,15 +32,18 @@ function App() {
     }
   }
 
+  const [shouldRenderHeader, setShouldRenderHeader] = useState(false);
+
   console.log(process.env);
   return (
     <ChakraProvider>
-      <Header />
+      <Header renderHeader={shouldRenderHeader}  />
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render={() => <Home />} />
           <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/login" component={SignIn} />
+          <Route exact path="/login"  render={() => <SignIn setRenderHeader={setShouldRenderHeader} />} />
+          <Route exact path="/links" component={DashboardLinks} />
         </Switch>
       </BrowserRouter>
     </ChakraProvider>

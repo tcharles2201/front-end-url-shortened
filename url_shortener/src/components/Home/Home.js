@@ -12,8 +12,26 @@ import {
 import MdCheckCircle from "@material-ui/icons/CheckCircle";
 
 import PostLink from "./PostLink";
+import { verify } from "jsonwebtoken";
+import { withRouter } from "react-router";
 
-export default class Home extends Component {
+class Home extends Component {
+
+  componentDidMount(){
+    const token = window.localStorage.getItem("token");
+
+    console.log(token);
+    if (!token){
+      return;
+    }
+    const data = verify(token, process.env.REACT_APP_SECRET);
+
+    console.log(data);
+    if (data && data.id){
+        this.props.history.replace("/links");
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -48,3 +66,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default withRouter(Home);
