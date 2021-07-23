@@ -34,7 +34,7 @@ class SignIn extends React.Component {
       console.log(response);
       window.localStorage.setItem("token", response.data.token);
       this.props.history.push("/links");
-      this.props.setRenderApp(!this.props.renderApp);
+      this.props.setRenderApp(true);
       console.log("ok");
     });
   };

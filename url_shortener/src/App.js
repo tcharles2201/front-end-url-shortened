@@ -15,7 +15,7 @@ import Logout from "./components/Logout/Logout";
 
 function App() {
   const [urlObtained, setOriginalLink] = useState("");
-  const [errorShortened, setErrorShortened] = useState("");
+  const [errorShortened, setErrorShortened] = useState(undefined);
 
   function getBaseUrlFromApp() {
     axios
@@ -47,7 +47,11 @@ function App() {
 
 
 
-  const [shouldRenderApp, setShouldRenderApp] = useState(false);
+  const [shouldRenderApp, setShouldRenderApp] = useState(true);
+
+  if (shouldRenderApp){
+    setShouldRenderApp(false);
+  }
 
   console.log(process.env);
   return (
@@ -56,7 +60,7 @@ function App() {
       {isRedirect() && errorShortened && <Heading>{errorShortened}</Heading> }
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={SignUp} />
           <Route
             exact
@@ -64,7 +68,7 @@ function App() {
             render={() => <SignIn renderApp={shouldRenderApp} setRenderApp={setShouldRenderApp} />}
           />
           <Route exact path="/links" component={DashboardLinks} />
-          <Route exact path="/logout" component={Logout} />
+          <Route exact path="/logout" render={() => <Logout renderApp={shouldRenderApp} setRenderApp={setShouldRenderApp} />} />
         </Switch>
       </BrowserRouter>
     </ChakraProvider>
