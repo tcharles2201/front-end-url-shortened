@@ -1,6 +1,5 @@
 all: 
-	make build:production 
-	make run:production
+	docker-compose up --build
 
 dev: 
 	make build:development

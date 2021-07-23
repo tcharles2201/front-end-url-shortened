@@ -55,23 +55,25 @@ export function DashboardLinks(props) {
   const [startRenderNumber, setStartRenderNumber] = useState(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const linkService = new LinkService();
-
   const token = window.localStorage.getItem("token");
   let data = null;
 
-  if (!token) {
+  if (!token){
     props.history.replace("/");
   }
   try {
+    console.log(token);
+    console.log(process.env);
     data = verify(token, process.env.REACT_APP_SECRET);
-  } catch (e) {
+    console.log(data);
+  }
+  catch (e){
+    console.log(e.message);
     props.history.replace("/");
     window.localStorage.removeItem("token");
   }
-
-  if (!data) {
-    window.localStorage.removeItem("token");
-    return <div></div>;
+  if (!data){
+    return (<div></div>);
   }
 
   function selectLink(event, link) {
