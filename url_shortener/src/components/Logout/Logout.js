@@ -1,9 +1,10 @@
+import React, { useRef, useState } from "react";
 import { withRouter } from "react-router";
 
 function Logout(props){
     window.localStorage.removeItem("token");
     props.history.replace("/");
-    this.props.setRenderApp(true);
+    props.setRenderApp(true);
     return (<div></div>)
 }
 
