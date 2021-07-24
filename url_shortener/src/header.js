@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
-  Link,
   Box,
   Heading,
   Flex,
@@ -9,13 +8,19 @@ import {
   Tabs,
   TabList,
   Tab,
+  Link
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
+import { useHistory, withRouter } from "react-router-dom";
+
 function Header(props){
-  const { renderApp, ...other } = props;
+  const { renderApp, setRenderApp,  ...other } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
+  const [currentPath, setCurrentPath] = useState(props.history.location.pathname);
+
+  console.log(currentPath);
 
   return (
     <Flex
@@ -28,34 +33,54 @@ function Header(props){
       color="white"
       {...other}
     >
-      <Flex align="center" mr={5}>
-        <Heading as="h1" size="lg" letterSpacing={"tighter"}>
-          <Link href="/">URL Shortner</Link>
-        </Heading>
-      </Flex>
-
-      <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
+    <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
         <HamburgerIcon />
       </Box>
+    <Tabs variant="soft-rounded" colorScheme="green" display="flex" flexDirection="row" alignItems="center" justifyContent="space-between"  minWidth="100%">
+
+      <Flex align="center" mr={5}>
+            <TabList>
+            <Tab onClick={() => { 
+                  props.history.push("/");
+                  props.setRenderApp(true);
+              }} isSelected={currentPath === "/"}> <Heading as="h1" size="lg" letterSpacing={"tighter"}>URL Shortner        </Heading>
+            </Tab>
+            </TabList>
+      </Flex>
+
+
 
       <Box
         display={{ base: isOpen ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        <Tabs variant="soft-rounded" colorScheme="green">
           <TabList>
-              {window.localStorage.getItem("token") && <Tab><Link href="/links">Dashboard</Link></Tab>}
-              {window.localStorage.getItem("token") && <Tab><Link href="/logout">Logout</Link></Tab>}
-              {!window.localStorage.getItem("token") && <Tab> <Link href="/login">Sign In</Link></Tab>}
-              {!window.localStorage.getItem("token") && <Tab><Link href="/signup">Sign Up</Link></Tab>}
-              <Tab>
-                <Link href="/apropos">A PROPOS</Link>
-              </Tab>
+              {window.localStorage.getItem("token") && <Tab onClick={() => {
+                  props.history.push("/links");
+                  props.setRenderApp(true);
+              }} isSelected={currentPath === "/links"}>Dashboard</Tab>}
+              {window.localStorage.getItem("token") && <Tab onClick={() => { 
+                  props.history.push("/logout");
+                  props.setRenderApp(true);
+              }} isSelected={currentPath === "/logout"}>Logout</Tab>}
+              {!window.localStorage.getItem("token") &&  <Tab onClick={() => {
+                  props.history.push("/login");
+                  props.setRenderApp(true);
+              }} isSelected={currentPath === "/login"}>Sign In</Tab>}
+              {!window.localStorage.getItem("token") && <Tab onClick={() => {
+                  props.history.push("/signup");
+                  props.setRenderApp(true);
+              }} isSelected={currentPath === "/signup"}>Sign Up</Tab>}
+              <Tab onClick={() => { 
+                  props.history.push("/apropos");
+                  props.setRenderApp(true);
+              }} isSelected={currentPath === "/apropos"}>A PROPOS</Tab>
           </TabList>
-        </Tabs>
       </Box>
+      </Tabs>
     </Flex>
+    
   );
 };
 
-export default Header;
+export default withRouter(Header);

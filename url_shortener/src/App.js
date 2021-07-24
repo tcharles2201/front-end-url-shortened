@@ -44,21 +44,19 @@ function App() {
     }
   }
 
-
-
-
   const [shouldRenderApp, setShouldRenderApp] = useState(true);
 
   if (shouldRenderApp){
+    console.log("enter ????");
     setShouldRenderApp(false);
   }
 
   console.log(process.env);
   return (
     <ChakraProvider>
-      {!isRedirect() && <Header renderApp={shouldRenderApp} />}
-      {isRedirect() && errorShortened && <Heading>{errorShortened}</Heading> }
       <BrowserRouter>
+      {!isRedirect() && <Header renderApp={shouldRenderApp} setRenderApp={setShouldRenderApp} />}
+      {isRedirect() && errorShortened && <Heading>{errorShortened}</Heading> }
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={SignUp} />
